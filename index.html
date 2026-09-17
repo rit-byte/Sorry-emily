@@ -20,7 +20,7 @@
       align-items: center;
       overflow: hidden;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      background: linear-gradient(135deg, #ffd6e0, #ff9fb5);
       position: relative;
     }
 
@@ -29,7 +29,7 @@
       max-width: 420px;
       padding: 40px 25px;
       text-align: center;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255,255,255,0.95);
       border-radius: 25px;
       box-shadow: 0 15px 40px rgba(0,0,0,0.2);
       position: relative;
@@ -95,12 +95,17 @@
       min-height: 28px;
     }
 
+    .small-text {
+      font-size: 14px;
+      color: #999;
+      margin-top: 15px;
+    }
+
     .floating-heart {
       position: absolute;
       bottom: -50px;
-      font-size: 25px;
-      animation: floatUp 5s linear forwards;
       pointer-events: none;
+      animation: floatUp 5s linear forwards;
     }
 
     .shake {
@@ -108,9 +113,10 @@
     }
 
     @keyframes heartbeat {
-      0%, 100% {
+      0%,100% {
         transform: scale(1);
       }
+
       50% {
         transform: scale(1.18);
       }
@@ -121,6 +127,7 @@
         opacity: 0;
         transform: scale(0.8);
       }
+
       to {
         opacity: 1;
         transform: scale(1);
@@ -147,12 +154,6 @@
         opacity: 0;
       }
     }
-
-    .sorry-text {
-      font-size: 14px;
-      color: #999;
-      margin-top: 15px;
-    }
   </style>
 </head>
 
@@ -162,7 +163,7 @@
 
     <div class="heart">❤️</div>
 
-    <h1>Hey Emily...</h1>
+    <h1>Hey Sheetal...</h1>
 
     <p>
       I'm really sorry 🥺<br>
@@ -178,12 +179,11 @@
 
     <div id="message"></div>
 
-    <div class="sorry-text">
-      I really hope you can forgive me 🥺
+    <div class="small-text">
+      I really hope you can forgive me 🥺❤️
     </div>
 
   </div>
-
 
   <script>
 
@@ -192,34 +192,31 @@
     const message = document.getElementById("message");
     const card = document.getElementById("card");
 
-    // Forgive button
+    // Forgive Me button
     forgiveBtn.addEventListener("click", function() {
 
-      message.innerHTML = "Thank you, Emily 🥺❤️ I promise I'll do better.";
+      message.innerHTML =
+        "Thank you, Sheetal 🥺❤️ I promise I'll do better.";
 
-      card.classList.remove("shake");
+      createHearts(30);
 
-      createHearts(25);
     });
 
 
     // Still Angry button
     angryBtn.addEventListener("click", function() {
 
-      message.innerHTML = "Okay... I'll keep saying sorry 🥺💗";
+      message.innerHTML =
+        "Okay... I'll keep saying sorry 🥺💗";
 
       // Shake the card
       card.classList.remove("shake");
-
-      // Restart animation
       void card.offsetWidth;
-
       card.classList.add("shake");
 
-      // Create lots of hearts
-      createHearts(15);
+      // Floating hearts
+      createHearts(20);
 
-      // Change button text
       angryBtn.innerHTML = "Still Angry? 😭";
 
     });
@@ -232,9 +229,12 @@
 
         const heart = document.createElement("div");
 
-        heart.classList.add("floating-heart");
+        heart.className = "floating-heart";
 
-        heart.innerHTML = ["❤️", "💗", "💕", "💖", "🥺"][Math.floor(Math.random() * 5)];
+        const hearts = ["❤️", "💗", "💕", "💖", "🥺"];
+
+        heart.innerHTML =
+          hearts[Math.floor(Math.random() * hearts.length)];
 
         heart.style.left = Math.random() * 100 + "vw";
 
